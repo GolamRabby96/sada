@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>MediBoi</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    {% block style %}{% endblock %}
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rating.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+  </head>
+  <body>
+
+    <header>
+          <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 pull-left">
+                        <div class="social">
+                            <ul class="list-unstyled">
+                              <li class="facebook"><a href="https://www.facebook.com/mediboi/" target = "_blank"><i class="fa fa-facebook"></i></a></li>
+                              <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                              <li class="rss"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                              <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                              <!-- <li class="vimeo"><a href="#"><i class="fa fa-vimeo"></i></a></li> -->
+                           </ul>
+                        </div> <!-- /.social-->
+                    </div> <!-- /.col-md-8-->
+                    <div id="top-link" class="text-right col-md-4">
+                      {% if user.is_authenticated %}
+                        <p>Welcome <b><strong>{{user.get_username}}</strong></b></p>
+                      {% endif %}
+                    </div> <!-- /#top-link /.col-md-4-->
+                </div> <!-- /.row-->
+            </div> <!-- /.container-->
+        </div> <!-- /.top-header-->
+        <!-- ********Top header end******** -->
+        <div class="container-fuluid">
+          {% if messages %}
+          <div class="col-md-12 messages">
+              {% for message in messages %}
+                <div style="text-align:center" class="alert alert-{{ message.tags }}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                      {{ message }}
+                </div>
+              {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-sm-3 col-xs-6">
+                    <div class="header-logo">
+                        <a href=""><img src="{% static 'images/logo.png' %}" alt="Logo" class="img-responsive"></a>
+                    </div> <!-- /.header-logo -->
+                </div> <!-- /.col-lg-2 col-sm-3 col-xs-6 -->
+                <div class="col-lg-8 col-sm-6 col-xs-12">
+                    <div id="header-search" class="input-group">
+                      <form id="base-top-form" action="{% url 'index' %}"  method="GET">
+                        <input type="text" name="q" value="{{request.GET.q}}" required placeholder="Search" class="form-control input-lg" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default btn-lg"><i class="fa fa-search hidden-lg hidden-md"></i><span class="hidden-sm hidden-xs">Search</span></button>
+                        </span>
+                      </form>
+                    </div> <!-- /.header-search -->
+                </div> <!-- /.col-lg-8 col-sm-6 col-xs-12 -->
+
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </header> <!-- /.header -->
+    <!--     ***************************
+        Header Section end
+    ************************** -->
+
+    <div class="iid navbar-fixed-top">
+      <nav class="navbar navbar-default nav-out-padding ">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header navbar-set-padding ">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand newclass branding" href="{% url 'index' %}">MediBoi</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-set-padding" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MBBS Books <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'category' name='1st Year MBBS Books' %}">1<sup>st</sup> Year MBBS Books</a></li>
+              <li><a href="{% url 'category' name='2nd Year MBBS Books' %}">2<sup>nd</sup> Year MBBS Books</a></li>
+              <li><a href="{% url 'category' name='3rd Year MBBS Books' %}">3<sup>rd</sup> Year MBBS Books</a></li>
+              <li><a href="{% url 'category' name='Final Year MBBS Books' %}">4<sup>th</sup> Year MBBS Books</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dental Books<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="">1<sup>st</sup> Year Dental Books</a></li>
+              <li><a href="">2<sup>nd</sup> Year Dental Books</a></li>
+              <li><a href="">3<sup>rd</sup> Year Dental Books</a></li>
+              <li><a href="">4<sup>th</sup> Year Dental Books</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MATS Books<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{% url 'category' name='1st Year MATS  Books' %}">1 <sup>st</sup> Year MATS Books</a></li>
+                <li><a href="{% url 'category' name='2nd Year MATS  Books' %}">2<sup>nd</sup> Year MATS Books</a></li>
+                <li><a href="{% url 'category' name='3rd Year MATS  Books' %}">3<sup>rd</sup> Year MATS Books</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nursing Books<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'category' name='1st Year NURSING Books' %}">1 <sup>st</sup> Year Nursing Books</a></li>
+              <li><a href="{% url 'category' name='2nd Year NURSING Books' %}">2<sup>nd</sup> Year Nursing Books</a></li>
+              <li><a href="{% url 'category' name='3rd Year NURSING Books' %}">3<sup>rd</sup> Year Nursing Books</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other Items<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'category' name='Apron' %}">Apron</a></li>
+              <li><a href="{% url 'category' name='Surgery Apron' %}">Surgery Apron</a></li>
+              <li><a href="{% url 'category' name='Bones' %}">Bones</a></li>
+              <li><a href="{% url 'category' name='Stethoscope & BP Machine' %}">Stethoscope & BP Machine</a></li>
+              <li><a href="{% url 'category' name='Diabetes Machine' %}">Diabetes Machine</a></li>
+            </ul>
+          </li>
+        </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+      </nav>
+    </div>
+
+    <!-- ************nav bar end ********************** -->
+
+    {% block foo %}
+    {% endblock %}
+
+    <!-- ********************************** -->
+            <!-- FOOTER SECTION -->
+    <!-- ********************************** -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- <div class="col-md-3 col-sm-6 footerlist">
+            <h3>Information</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Investor Relation</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 footerlist">
+            <h3>Customer Service</h3>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Site Map</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-6 footerlist">
+            <h3>Extras</h3>
+            <ul>
+              <li><a href="#">Brands</a></li>
+              <li><a href="#">Gift Certificates</a></li>
+              <li><a href="#">Affiliates</a></li>
+              <li><a href="#">Specials</a></li>
+            </ul>
+          </div>
+           <div class="col-md-3 col-sm-6 footerlist">
+            <h3>My Account</h3>
+            <ul>
+              <li><a href="#">My Account</a></li>
+              <li><a href="#">Order History</a></li>
+              <li><a href="#">Wish List</a></li>
+              <li><a href="#">Newsletter</a></li>
+            </ul>
+          </div> -->
+          <div class="col-md-12 col-sm-12 col-xs-12 lastfooter footerlist">
+            <ul>
+               <li><a href="#">Powered By MediBoi</a></li>
+              <li>©Copyright 2019 by MediBoi. All Rights Reserved.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- ********************************** -->
+            <!-- FOOTER SECTION -->
+    <!-- ********************************** -->
+    <!-- ............................................ -->
+    <!-- ............................................ -->
+    <!-- ............................................ -->
+    <!-- this is register section function -->
+    <div class="modal fade bs-example-modal-lg-reg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="loginsection-input">
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="loginsection-input">
+            <form method="POST" action="{url 'register'}">
+              {% csrf_token %}
+              {{forms.as_p}}
+              {{cus_form.as_p}}
+              <br>
+              <button type="submit" class="btn btn-success col-md-12">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ............................................ -->
+    <!-- ............................................ -->
+
+
+
+
+
+    <!-- *********Go To Section Start******** -->
+    <div class="go-top">
+     <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- *********Go To Section Start******** -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+    <!-- **********navbar script start************* -->
+  <!--   <script type="text/javascript">
+        $(function(){
+          setTimeout(function() {
+            $('.navbar-brand').removeClass('newclass');
+          }, 500);
+        });
+         $(function(){
+          setTimeout(function() {
+            $('.padddd').removeClass('padminus');
+          }, 500);
+        });
+
+  </script> -->
+  <!-- **********navbar script end************* -->
+
+
+    <!-- ####### slider start ################# -->
+        <script type="text/javascript">
+              $(document).ready(function(){
+                  $("#owl-demo").owlCarousel({
+
+                    navigation : false, // Show next and prev buttons
+                    autoplay : true,
+                    slideSpeed : 300,
+                    paginationSpeed : 1000,
+                    animateOut: 'fadeOut',
+                    animateIn: 'fadeIn',
+                     loop : true,
+
+
+                    items : 1,
+                    itemsDesktop : false,
+                    itemsDesktopSmall : false,
+                    itemsTablet: false,
+                    itemsMobile : false
+                  });
+                });
+            </script>
+    <!-- ####### slider end ################# -->
+    <script type="text/javascript">
+    $('alert').on('closed.bs.alert', function () {
+      $().alert('close')
+    })
+    </script>
+
+  </body>
+</html>
